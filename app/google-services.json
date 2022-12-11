@@ -1,0 +1,106 @@
+{
+  "project_info": {
+    "project_number": "382725189797",
+    "firebase_url": "https://pg-app-chat-default-rtdb.firebaseio.com",
+    "project_id": "pg-app-chat",
+    "storage_bucket": "pg-app-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:382725189797:android:0341aa225af424054a5d4c",
+        "android_client_info": {
+          "package_name": "com.app.kishore.pguser"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "382725189797-8mf1d349rl641992cofjc22jcctouduf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVYwEa4XG2qLViP6vl30cJ35BjckOBTUs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "382725189797-8mf1d349rl641992cofjc22jcctouduf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:382725189797:android:c7883974f7d7c9ca4a5d4c",
+        "android_client_info": {
+          "package_name": "com.patel.tanmay.assignment_login"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "382725189797-8mf1d349rl641992cofjc22jcctouduf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVYwEa4XG2qLViP6vl30cJ35BjckOBTUs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "382725189797-8mf1d349rl641992cofjc22jcctouduf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:382725189797:android:b261b39d7f6384e04a5d4c",
+        "android_client_info": {
+          "package_name": "com.patel.tanmay.assignment_login.models"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "382725189797-pslsia9d6eibumrvivjv92218lbochmd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.patel.tanmay.assignment_login.models",
+            "certificate_hash": "115c05967e48407561a189d0706fa5093af5823b"
+          }
+        },
+        {
+          "client_id": "382725189797-8mf1d349rl641992cofjc22jcctouduf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVYwEa4XG2qLViP6vl30cJ35BjckOBTUs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "382725189797-8mf1d349rl641992cofjc22jcctouduf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

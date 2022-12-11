@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="380dp"
+    android:padding="8dp"
+    android:background="#F4FFFE"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:layout_height="match_parent"
+    tools:context=".activities.MemberInfoActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:padding="4dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+       >
+
+
+        <TextView
+            android:id="@+id/memberName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:lineSpacingExtra="2sp"
+            android:text="Member Name"
+            android:textColor="#1C1B1F"
+            android:textSize="24sp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F4FFFE">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F4FFFE"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="32dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/member_image"
+                        android:layout_width="132dp"
+                        android:layout_height="132dp"
+                        android:layout_marginTop="16dp"
+                        android:src="@drawable/man"
+                        app:civ_border_color="#FF000000"
+                        app:civ_border_width="2dp" />
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="32dp"
+                        android:layout_marginTop="32dp"
+                        android:background="@drawable/edit_text_selector"
+                        android:padding="10dp">
+
+                        <!-- INPUT -->
+                        <EditText
+                            android:id="@+id/username_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/username_icon"
+                            android:backgroundTint="#F4FFFE"
+                            android:fontFamily="@font/roboto"
+                            android:hint="Username"
+                            android:padding="10dp"
+                            android:text=""
+                            android:textColor="#49454F"
+                            android:textColorHint="#49454F"
+                            android:textFontWeight="400"
+                            android:textSize="16sp" />
+
+                        <!-- ICON -->
+                        <ImageView
+                            android:id="@+id/username_icon"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:padding="3dp"
+                            android:src="@drawable/mail_icon" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="32dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/edit_text_selector"
+                        android:padding="10dp">
+
+                        <!-- INPUT -->
+                        <EditText
+                            android:id="@+id/phone_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/phone_icon"
+                            android:backgroundTint="#F4FFFE"
+                            android:fontFamily="@font/roboto"
+                            android:hint="Phone"
+                            android:padding="10dp"
+                            android:text=""
+                            android:textColor="#49454F"
+                            android:textColorHint="#49454F"
+                            android:textFontWeight="400"
+                            android:textSize="16sp" />
+
+                        <!-- ICON -->
+                        <ImageView
+                            android:id="@+id/phone_icon"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:padding="3dp"
+                            android:src="@drawable/call_icon" />
+
+                    </RelativeLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="32dp"
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical">
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:hint="Alternate Number"
+                            android:textColorHint="#808080"
+                            app:boxStrokeColor="#49454F"
+                            app:boxStrokeWidthFocused="2dp"
+                            app:endIconMode="clear_text"
+                            app:hintTextColor="@color/black"
+
+                            >
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/evAltNumber"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:inputType="phone"
+                                android:textColor="@color/black" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="top"
+                            android:lineSpacingExtra="2sp"
+                            android:text="Gender : "
+                            android:textColor="#1C1B1F"
+                            android:textSize="18sp" />
+
+                        <RadioGroup
+                            android:id="@+id/genderRG"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <RadioButton
+                                android:id="@+id/maleRB"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="Male" />
+
+                            <RadioButton
+                                android:id="@+id/femaleRB"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="Female" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="top"
+                            android:lineSpacingExtra="2sp"
+                            android:text="Food Type : "
+                            android:textColor="#1C1B1F"
+                            android:textSize="18sp" />
+
+                        <RadioGroup
+                            android:id="@+id/foodRG"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <RadioButton
+                                android:id="@+id/vegRB"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="Veg" />
+
+                            <RadioButton
+                                android:id="@+id/nonvegRB"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="Non-Veg" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="top"
+                            android:lineSpacingExtra="2sp"
+                            android:text="Office hours (in 24hrs) : "
+                            android:textColor="#1C1B1F"
+                            android:textSize="18sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginEnd="4dp"
+                                android:layout_weight="1"
+                                android:hint="Starts at"
+                                android:textColorHint="#808080"
+                                app:boxStrokeColor="#49454F"
+                                app:boxStrokeWidthFocused="2dp"
+                                app:endIconMode="clear_text"
+                                app:hintTextColor="@color/black"
+
+                                >
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/evOfficeStart"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:inputType="number"
+                                    android:textColor="@color/black" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_weight="1"
+                                android:hint="Ends at"
+                                android:textColorHint="#808080"
+                                app:boxStrokeColor="#49454F"
+                                app:boxStrokeWidthFocused="2dp"
+                                app:endIconMode="clear_text"
+                                app:hintTextColor="@color/black"
+
+                                >
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/evOfficeEnds"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:inputType="number"
+                                    android:textColor="@color/black" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+                        </LinearLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:hint="Home Address"
+                            android:textColorHint="#808080"
+                            app:boxStrokeColor="#49454F"
+                            app:boxStrokeWidthFocused="2dp"
+                            app:endIconMode="clear_text"
+                            app:hintTextColor="@color/black"
+
+                            >
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/evHomeAddress"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:inputType="text"
+                                android:textColor="@color/black" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:hint="Eduction"
+                            android:textColorHint="#808080"
+                            app:boxStrokeColor="#49454F"
+                            app:boxStrokeWidthFocused="2dp"
+                            app:endIconMode="clear_text"
+                            app:hintTextColor="@color/black"
+
+                            >
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/evEducation"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:inputType="text"
+                                android:textColor="@color/black" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <TextView
+                            android:id="@+id/dndStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="top"
+                            android:lineSpacingExtra="2sp"
+                            android:text="DND : "
+                            android:textColor="#1C1B1F"
+                            android:textSize="18sp" />
+
+
+                        <TextView
+                            android:id="@+id/close"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="16dp"
+                            android:background="@drawable/logout_back"
+                            android:fontFamily="@font/roboto"
+                            android:gravity="center"
+                            android:paddingHorizontal="16dp"
+                            android:text="Close"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </LinearLayout>
+
+</LinearLayout>

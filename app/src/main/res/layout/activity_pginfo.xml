@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.PGInfoActivity">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#F4FFFE"
+        android:elevation="10dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/back_btn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/back_icon"
+
+                />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar1"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="top"
+                        android:lineSpacingExtra="2sp"
+                        android:text="PG INFO"
+                        android:textColor="#1C1B1F"
+                        android:textFontWeight="400"
+                        android:textSize="22sp" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="16dp"
+                        android:src="@drawable/menu_icon"
+
+                        />
+
+                </RelativeLayout>
+
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </LinearLayout>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="4dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/backgroung"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pgbanner_imageView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/backgroung"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/pgbanner_imageView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/banner"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="2dp"
+                app:layout_constraintCircleRadius="10dp"
+                />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:paddingStart="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto"
+                            android:text="PG Name : "
+                            android:textColor="@color/text_color"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="@+id/tvRoomDesc"
+                            app:layout_constraintTop_toBottomOf="@+id/tvRoomDesc" />
+
+
+                        <TextView
+                            android:textAllCaps="true"
+                            android:id="@+id/tvPGName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Not set"
+                            android:textColor="@color/text_color"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="@+id/tvRoomDesc"
+                            app:layout_constraintTop_toBottomOf="@+id/tvRoomDesc" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto"
+                            android:text="Owner Name : "
+                            android:textColor="@color/text_color"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="@+id/tvRoomDesc"
+                            app:layout_constraintTop_toBottomOf="@+id/tvRoomDesc" />
+
+
+                        <TextView
+                            android:id="@+id/tvPGOwnerName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Not set"
+                            android:textColor="@color/text_color"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="@+id/tvRoomDesc"
+                            app:layout_constraintTop_toBottomOf="@+id/tvRoomDesc" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto"
+                            android:text="Email : "
+                            android:textColor="@color/text_color"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="@+id/tvRoomDesc"
+                            app:layout_constraintTop_toBottomOf="@+id/tvRoomDesc" />
+
+
+                        <TextView
+                            android:id="@+id/tvPGEmail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Not set"
+                            android:textColor="@color/text_color"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="@+id/tvRoomDesc"
+                            app:layout_constraintTop_toBottomOf="@+id/tvRoomDesc" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto"
+                            android:text="Phone : "
+                            android:textColor="@color/text_color"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="@+id/tvRoomDesc"
+                            app:layout_constraintTop_toBottomOf="@+id/tvRoomDesc" />
+
+
+                        <TextView
+                            android:id="@+id/tvPGPhone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Not set"
+                            android:textColor="@color/text_color"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="@+id/tvRoomDesc"
+                            app:layout_constraintTop_toBottomOf="@+id/tvRoomDesc" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto"
+                            android:text="Address : "
+                            android:textColor="@color/text_color"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="@+id/tvRoomDesc"
+                            app:layout_constraintTop_toBottomOf="@+id/tvRoomDesc" />
+
+
+                        <TextView
+                            android:id="@+id/tvPGaddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Not set"
+                            android:textColor="@color/text_color"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="@+id/tvRoomDesc"
+                            app:layout_constraintTop_toBottomOf="@+id/tvRoomDesc" />
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto"
+                            android:text="Type : "
+                            android:textColor="@color/text_color"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="@+id/tvRoomDesc"
+                            app:layout_constraintTop_toBottomOf="@+id/tvRoomDesc" />
+
+
+                        <TextView
+                            android:id="@+id/tvPGType"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Not set"
+                            android:textAllCaps="true"
+                            android:textColor="@color/text_color"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="@+id/tvRoomDesc"
+                            app:layout_constraintTop_toBottomOf="@+id/tvRoomDesc" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto"
+                            android:text="Sharing Options : "
+                            android:textColor="@color/text_color"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="@+id/tvRoomDesc"
+                            app:layout_constraintTop_toBottomOf="@+id/tvRoomDesc" />
+
+
+                        <TextView
+                            android:id="@+id/tvShareOpt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Not set"
+                            android:textColor="@color/text_color"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="@+id/tvRoomDesc"
+                            app:layout_constraintTop_toBottomOf="@+id/tvRoomDesc" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto"
+                            android:text="Food : "
+                            android:textColor="@color/text_color"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="@+id/tvRoomDesc"
+                            app:layout_constraintTop_toBottomOf="@+id/tvRoomDesc" />
+
+
+                        <TextView
+                            android:id="@+id/tvPGFood"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Not set"
+                            android:textColor="@color/text_color"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="@+id/tvRoomDesc"
+                            app:layout_constraintTop_toBottomOf="@+id/tvRoomDesc" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Rules : "
+                            android:textColor="@color/text_color"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="@+id/tvRoomDesc"
+                            app:layout_constraintTop_toBottomOf="@+id/tvRoomDesc" />
+
+                        <TextView
+                            android:id="@+id/tvSmoking"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto"
+                            android:textColor="@color/text_color"
+                            android:textSize="16sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Smoking : Not Allowed"/>
+
+                        <TextView
+                            android:id="@+id/tvParty"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto"
+                            android:textColor="@color/text_color"
+                            android:textSize="16sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Parties : Not Allowed"/>
+
+
+                        <TextView
+                            android:id="@+id/tvVisitors"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto"
+                            android:textColor="@color/text_color"
+                            android:textSize="16sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Visitors : Not Allowed"/>
+
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Facilities : "
+                            android:textColor="@color/text_color"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="@+id/tvRoomDesc"
+                            app:layout_constraintTop_toBottomOf="@+id/tvRoomDesc" />
+
+
+
+                        <TextView
+                            android:layout_marginBottom="8dp"
+                            android:id="@+id/facilitiesTv"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto"
+                            android:textColor="@color/text_color"
+                            android:textSize="16sp"
+                            android:padding="2dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="No Facilities"/>
+
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+
+
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+
+
+
+
+
+</LinearLayout>

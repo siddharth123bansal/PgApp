@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="10dp"
+    android:paddingStart="10dp"
+    android:paddingEnd="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/receiver_profile_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/profile_pic"
+        app:civ_border_color="#FF000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_marginStart="10dp"
+        android:id="@+id/tvmemberName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:gravity="top"
+        android:lineSpacingExtra="2sp"
+        android:text="Tanmay Patel"
+        android:textColor="#1C1B1F"
+        android:textFontWeight="400"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/receiver_profile_image"
+        app:layout_constraintStart_toEndOf="@+id/receiver_profile_image"
+        app:layout_constraintTop_toTopOf="@+id/receiver_profile_image" />
+
+
+    <TextView
+        android:id="@+id/img_chat_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:gravity="top"
+        android:lineSpacingExtra="2sp"
+        android:text="+91 9600000000"
+        android:textColor="#1C1B1F"
+        android:textFontWeight="400"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/phone_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="10dp"
+        android:padding="3dp"
+        android:src="@drawable/call_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/img_chat_icon"
+        app:layout_constraintEnd_toStartOf="@+id/img_chat_icon"
+        app:layout_constraintTop_toTopOf="@+id/img_chat_icon" />
+
+    <ImageView
+        android:id="@+id/member_menu_icon"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:padding="3dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/menu_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/phone_icon"
+        app:layout_constraintEnd_toStartOf="@+id/phone_icon"
+        app:layout_constraintTop_toTopOf="@+id/phone_icon" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
