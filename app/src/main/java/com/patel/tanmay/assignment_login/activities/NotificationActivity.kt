@@ -52,11 +52,8 @@ class NotificationActivity : AppCompatActivity() {
             override fun responseCallback(response: JSONObject) {
                 notificationList.clear()
                 if(response.has("message") && response.getString("message").equals("No notifications")){
-                    notificationList.add(Notification("No notifications"))
-
-                    loadingDialog.cancel()
                 }else {
-                  val notifications = response.getJSONArray("notifications")
+                    val notifications = response.getJSONArray("notifications")
                     if(notifications.length() > 0){
                         for(i in 0..notifications.length()-1){
                             val notification = notifications.get(i) as JSONObject

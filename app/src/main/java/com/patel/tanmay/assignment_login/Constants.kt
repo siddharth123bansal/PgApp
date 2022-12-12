@@ -2,8 +2,6 @@ package com.patel.tanmay.assignment_login
 
 class Constants {
     companion object {
-
-
         val BASE_URL = "https://backend.pgconnect.in/api/"
         val DELETE_ROOM  = BASE_URL + "pgowner/deleteroom/"
         val ADD_USER_TO_ROOM  = BASE_URL + "pgowner/addusertoexistingroom/"
@@ -14,7 +12,7 @@ class Constants {
         val CHANGE_COVER_IMAGE  = BASE_URL + "pgowner/changecoverimage"
         val CHANGE_PROFILE_IMAGE  = BASE_URL + "pgowner/changeprofileimage"
         val CHANGE_PROFILE  = BASE_URL + "pgowner/changeprofile"
-        val GET_NOTIFICATIONS  = BASE_URL + "pgowner/getnotifications"
+        val GET_NOTIFICATIONS  =" https://backend.pgconnect.in/api/pgowner/getnotifications"
         val GET_USER_PROFILE_BY_ID  = BASE_URL + "pgowner/getprofileofuserbyid/"
         val ADD_DEVICE_TOKEN  = BASE_URL + "login/pgdevicetoken"
         val LOGIN_URL  = BASE_URL + "login/pg"
@@ -25,10 +23,6 @@ class Constants {
         val REMOVE_USER_FROM_ROOM  = BASE_URL + "pgowner/removeuserfromroom"
         val PAY_RENT  = BASE_URL + "pgowner/payrent"
         val CHANGE_PASSWORD = BASE_URL + "user/changepassword"
-        
-      
-
-
-
+        val markAsRead= BASE_URL+"pgowner/marknotificationread"
     }
 }

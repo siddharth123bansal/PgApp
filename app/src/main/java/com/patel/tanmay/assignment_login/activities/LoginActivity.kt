@@ -37,7 +37,6 @@ class LoginActivity : AppCompatActivity() {
         passwordED = findViewById(R.id.evPassword)
         rememberCB = findViewById(R.id.cbPaid)
         loading = findViewById(R.id.loading)
-
             if (Utils.isUserPresent(this)){
                 val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                 intent.putExtra("USER",Utils.getUser(this))
@@ -57,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
 
                 val userEmail = emailED.text.toString().trim()
                 val userPass = passwordED.text.toString().trim()
-                
+
                 if(userEmail.length !=0 && userPass.length != 0){
 
                     loading.visibility = View.VISIBLE
@@ -68,26 +67,17 @@ class LoginActivity : AppCompatActivity() {
                     val request = VolleyRequest(this@LoginActivity, object :
                         CallBack {
                         override fun responseCallback(response: JSONObject) {
+
                             val userObj = response.get("user") as JSONObject
                             sendDeviceToken(userObj)
                             fetchData(userObj)
-
-
                         }
-
-
-
-
-
                         override fun errorCallback(error_message: JSONObject) {
                             loading.visibility = View.GONE
                             loginBtn.isEnabled = true
                             Log.d(TAG,error_message.getString("error"))
                             Toast.makeText(this@LoginActivity, error_message.getString("error"), Toast.LENGTH_LONG).show()
-
-
                         }
-
                         override fun responseStatus(response_code: NetworkResponse?) {
                             if (response_code != null) {
                                 RES_CODE = response_code.statusCode
@@ -95,28 +85,17 @@ class LoginActivity : AppCompatActivity() {
                             Log.d(TAG,"RESPONCE_CODE : "+response_code)
                         }
                     })
-
                     val bodyData = JSONObject()
                     bodyData.put("email",userEmail)
                     bodyData.put("password",userPass)
-
                     request.postWithBody(Constants.LOGIN_URL,bodyData,"")
-
-
-
                 }
                 else {
                     Toast.makeText(this@LoginActivity, "Invaild Credentials", Toast.LENGTH_SHORT).show()
                 }
-                
-                
-                
             }
         })
-        
-        
     }
-
     private fun sendDeviceToken(res: JSONObject) {
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
