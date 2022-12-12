@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <uses-feature android:name="android.hardware.screen.portrait" />
 
     <application
@@ -15,34 +16,38 @@
         android:icon="@drawable/pg_logo"
         android:label="@string/app_name"
         android:roundIcon="@drawable/pg_logo"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.Assignment_Login"
         android:usesCleartextTraffic="true"
-        android:screenOrientation="portrait"
         tools:targetApi="31">
         <activity
+            android:name=".DatepickerIntent"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activities.PGInfoActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
-
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.ApplyNowActivity"
-            android:screenOrientation="portrait"
-
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.NotificationActivity"
-            android:screenOrientation="portrait"
-
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.ChatActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.RentMemberActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.Rents"
             android:exported="false" />
@@ -54,8 +59,8 @@
             android:exported="false" />
         <activity
             android:name=".activities.RoomActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" /> <!-- <activity -->
+            android:exported="false"
+            android:screenOrientation="portrait" /> <!-- <activity -->
         <!-- android:name=".LoadingDialog" -->
         <!-- android:exported="false" /> -->
         <activity
@@ -75,16 +80,15 @@
             android:exported="false"
             android:label="@string/title_activity_profile"
             android:screenOrientation="portrait"
-
             android:theme="@style/Theme.Assignment_Login.NoActionBar" />
         <activity
             android:name=".activities.HomeActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.LoginActivity"
-            android:screenOrientation="portrait"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -18,10 +18,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.patel.tanmay.assignment_login.Constants
-import com.patel.tanmay.assignment_login.R
-import com.patel.tanmay.assignment_login.Utils
-import com.patel.tanmay.assignment_login.VolleyRequest
+import com.patel.tanmay.assignment_login.*
 import com.patel.tanmay.assignment_login.interfaces.CallBack
 import com.patel.tanmay.assignment_login.models.Member
 import com.patel.tanmay.assignment_login.models.MonthyRent
@@ -77,8 +74,21 @@ class HomeActivity : AppCompatActivity() {
                 y=iy
                 m=im
                 day=id
+
+
+
             },2022,12,12)
-            Toast.makeText(this@HomeActivity,"present count is "+(finalcount),Toast.LENGTH_LONG).show()
+            //Toast.makeText(this@HomeActivity,"present count is "+(finalcount),Toast.LENGTH_LONG).show()
+
+           // pdp.setOnCancelListener { Toast.makeText(this@HomeActivity,"present count is "+(finalcount),Toast.LENGTH_LONG).show() }
+            pdp.setOnDismissListener {
+                val i = Intent(this@HomeActivity,DatepickerIntent::class.java)
+//                val str=(totalMembers-c)
+                Toast.makeText(this@HomeActivity,"present count is "+(finalcount),Toast.LENGTH_LONG).show()
+                i.putExtra("data",finalcount.toString())
+                startActivity(i)
+                finish()
+            }
             pdp.show()
         }
         fetchNotifications(userObj.get("token").toString())
@@ -161,7 +171,7 @@ class HomeActivity : AppCompatActivity() {
 
     fun markasread(userToken : String){
 
-        Toast.makeText(this@HomeActivity," marked as read",Toast.LENGTH_LONG).show()
+        //Toast.makeText(this@HomeActivity," marked as read",Toast.LENGTH_LONG).show()
         val request =VolleyRequest(this,object :CallBack{
             override fun responseCallback(response: JSONObject?) {
                 val res=JSONObject(response.toString())
@@ -176,6 +186,8 @@ class HomeActivity : AppCompatActivity() {
                 Log.d("asd",response_code.toString())
             }
         })
+
+
         val bodyData = JSONObject()
         request.putWithBody(Constants.markAsRead,bodyData,userToken)
     }
