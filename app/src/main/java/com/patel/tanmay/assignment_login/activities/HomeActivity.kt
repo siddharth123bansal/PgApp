@@ -188,11 +188,11 @@ class HomeActivity : AppCompatActivity() {
                 //notificationList.clear()
                 val res=JSONObject(response.toString())
                 Log.d("resads",res.toString())
-                val bellicon=res.getString("message")
+                val bellicon=res.getString("read")
                 //Toast.makeText(this@HomeActivity,"response is "+res.toString(),Toast.LENGTH_LONG).show()
 
                 //Toast.makeText(this@HomeActivity," "+bellicon,Toast.LENGTH_LONG).show()
-                if(bellicon.equals("No notifications")) {
+                if(bellicon.equals("true")) {
                     //Toast.makeText(this@HomeActivity, "NO Red Dot", Toast.LENGTH_LONG).show()
                     notificationBtn.setImageResource(R.drawable.bell)
                 }

@@ -279,7 +279,7 @@ public class VolleyRequest {
            @Override
            public Map<String, String> getHeaders() throws AuthFailureError {
                if(token.length() == 0)
-               return super.getHeaders();
+                return super.getHeaders();
                Map<String, String> headers = new HashMap<String, String>();
                headers.put("Authorization", "Bearer " + token);
                return headers;
@@ -290,16 +290,12 @@ public class VolleyRequest {
                return super.getBodyContentType();
            }
        };
-
-
        request.setRetryPolicy(
                new DefaultRetryPolicy(
                        0,
                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
                ));
-
-
        q.add(request);
    }else{
        Toast.makeText(c,"No Internet Connection",Toast.LENGTH_LONG).show();
