@@ -79,12 +79,14 @@ class HomeActivity : AppCompatActivity() {
             //Toast.makeText(this@HomeActivity,"present count is "+(finalcount),Toast.LENGTH_LONG).show()
 
            // pdp.setOnCancelListener { Toast.makeText(this@HomeActivity,"present count is "+(finalcount),Toast.LENGTH_LONG).show() }
-            pdp.setOnDismissListener {
+            pdp.setOnDateSetListener{ view, iy, im, id ->
                 val i = Intent(this@HomeActivity,DatepickerIntent::class.java)
                 i.putExtra("data",finalcount.toString())
                 startActivity(i)
             }
+
             pdp.show()
+
         }
         fetchNotifications(userObj.get("token").toString())
 
