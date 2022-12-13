@@ -11,6 +11,6 @@ class DatepickerIntent : AppCompatActivity() {
         setContentView(R.layout.activity_datepicker_intent)
         var str =intent.getStringExtra("data")
         textValue.setText(str)
-        Toast.makeText(this@DatepickerIntent,"present count is "+str,Toast.LENGTH_LONG).show()
+        //Toast.makeText(this@DatepickerIntent,"present count is "+str,Toast.LENGTH_LONG).show()
     }
 }

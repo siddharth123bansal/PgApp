@@ -41,8 +41,6 @@ class HomeActivity : AppCompatActivity() {
     private var totalBeds = 0
     private var totalMembers = 0
     private var totalRentPaid = 0;
-    var bell:String="true"
-    var url:String ="https://siddharthbansal.000webhostapp.com/user.json"
     var y:Int=0
     var m:Int=0
     var day:Int=0
@@ -176,7 +174,7 @@ class HomeActivity : AppCompatActivity() {
             override fun responseCallback(response: JSONObject?) {
                 val res=JSONObject(response.toString())
                 val msg=res.getString("message")
-                Log.d("asd",msg)
+                Log.d("asd",msg.toString())
 //                Toast.makeText(this@HomeActivity,"Marked as read",Toast.LENGTH_LONG).show()
             }
             override fun errorCallback(error_message: JSONObject?) {
@@ -199,7 +197,7 @@ class HomeActivity : AppCompatActivity() {
             override fun responseCallback(response: JSONObject) {
                 //notificationList.clear()
                 val res=JSONObject(response.toString())
-                Log.d("resads",res.toString())
+                //Log.d("resads",res.toString())
                 val bellicon=res.getString("read")
                 //Toast.makeText(this@HomeActivity,"response is "+res.toString(),Toast.LENGTH_LONG).show()
 
@@ -222,10 +220,12 @@ class HomeActivity : AppCompatActivity() {
         })
         request.getRequest(Constants.GET_NOTIFICATIONS,userToken)
     }
+
     private fun fetchData(){
         totalBeds = 0
         totalMembers = 0
         totalRentPaid = 0
+        c=0
         val request = VolleyRequest(this@HomeActivity, object :
             CallBack {
             override fun responseCallback(response: JSONObject) {
@@ -292,7 +292,7 @@ class HomeActivity : AppCompatActivity() {
 
                // loadingDialog.cancel()
 
-                memberText.setText("("+(totalMembers-c)+")")
+                memberText.setText("("+finalcount+")")
                 animation_view2.visibility = View.GONE
                 memberText.visibility = View.VISIBLE
 

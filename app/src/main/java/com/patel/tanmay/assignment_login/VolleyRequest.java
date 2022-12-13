@@ -210,8 +210,7 @@ public class VolleyRequest {
 
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
-                    if(token.length() == 0)
-                        return super.getHeaders();
+                    if(token.length() == 0)return super.getHeaders();
                     Map<String, String> headers = new HashMap<String, String>();
                     headers.put("Authorization", "Bearer " + token);
                     return headers;
