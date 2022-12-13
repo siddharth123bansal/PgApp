@@ -1,6 +1,8 @@
 package com.patel.tanmay.assignment_login.fragments
 
 
+import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -28,6 +30,7 @@ import com.patel.tanmay.assignment_login.Constants
 import com.patel.tanmay.assignment_login.R
 import com.patel.tanmay.assignment_login.VolleyMultipartRequest
 import com.patel.tanmay.assignment_login.activities.LoadingDialog
+import kotlinx.android.synthetic.main.fragment_member_form.*
 import kotlinx.android.synthetic.main.fragment_member_form.view.*
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
@@ -40,7 +43,8 @@ class MemberFormFragment(val token : String, val roomID :String,val fetchRoomMem
     lateinit var memberOccupation : TextInputEditText
     lateinit var rentAmount : TextInputEditText
     lateinit var advRentAmt : TextInputEditText
-    lateinit var browseBtn : TextView
+    lateinit var doj : TextInputEditText
+    lateinit var loc : TextInputEditText
     lateinit var genRG: RadioGroup
     lateinit var addBtn : TextView
     lateinit var encodeImageString: String
@@ -56,6 +60,7 @@ class MemberFormFragment(val token : String, val roomID :String,val fetchRoomMem
 
     }
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -65,50 +70,29 @@ class MemberFormFragment(val token : String, val roomID :String,val fetchRoomMem
         memberName = view.findViewById(R.id.evMemberName)
         memberPhone = view.findViewById(R.id.evMemberPhone)
         memberOccupation = view.findViewById(R.id.evMemberOccupation)
-        browseBtn = view.findViewById(R.id.browseBtn)
+        //browseBtn = view.findViewById(R.id.browseBtn)
         memberEmail = view.findViewById(R.id.evMemberEmail)
         addBtn = view.findViewById(R.id.btnAllowAccess)
         genRG = view.findViewById(R.id.genderRadioGroup)
         rentAmount = view.findViewById(R.id.evMemberRentAmt)
         advRentAmt  = view.evMemberAdvRentAmt
+        doj=view.findViewById(R.id.evMemberdateofjoin)
+        loc=view.findViewById(R.id.evMemberlocation)
 
         encodeImageString=""
-        browseBtn.text = "Browse"
-        browseBtn.setBackgroundResource(R.drawable.browse_btn_back)
-
-        browseBtn.setOnClickListener(object :View.OnClickListener{
-            override fun onClick(p0: View?) {
-                Dexter.withContext(context)
-                    .withPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                    .withListener(object : PermissionListener{
-                        override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
-                            val i = Intent(Intent.ACTION_PICK)
-                            i.setType("image/*")
-                            startActivityForResult(Intent.createChooser(i,"Browse Document"),1)
-                        }
-
-                        override fun onPermissionDenied(p0: PermissionDeniedResponse?) {
-
-                        }
-
-                        override fun onPermissionRationaleShouldBeShown(
-                            p0: PermissionRequest?,
-                            p1: PermissionToken?
-                        ) {
-                           p1?.cancelPermissionRequest()
-                        }
-                    }).check()
-            }
-        })
-
-
-
-
         view.findViewById<ImageView>(R.id.back_btn).setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
                 this@MemberFormFragment.dismiss()
             }
         })
+            doj.setOnClickListener {
+            val pdp = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { view, iy, im, id ->
+                doj.setText(""+iy+"/"+im+"/"+id)
+                //Toast.makeText(this@HomeActivity,(""+finalcount+""+totalMembers.toString()),Toast.LENGTH_LONG).show()
+
+            },2022,10,11)
+            pdp.show()
+        }
 
         view.findViewById<TextView>(R.id.btnCancel).setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
@@ -163,8 +147,6 @@ class MemberFormFragment(val token : String, val roomID :String,val fetchRoomMem
 
                val  inputStream = context?.contentResolver?.openInputStream(filePath)
                 bitmap = BitmapFactory.decodeStream(inputStream)
-                browseBtn.text = "UPLOADED 👍"
-                browseBtn.setBackgroundResource(R.drawable.btn_back)
 //                encodeBitmapImage(bitmap)
 
             }catch (e : Exception){
@@ -223,6 +205,8 @@ class MemberFormFragment(val token : String, val roomID :String,val fetchRoomMem
                 params.put("name",memberName.text.toString())
                 params.put("rent",rentAmount.text.toString())
                 params.put("advance",advRentAmt.text.toString())
+                params.put("dateofjoining",doj.text.toString())
+                params.put("location",loc.text.toString())
 
                 Log.d("IMG","HI on VALUE_PARMS")
                 return params

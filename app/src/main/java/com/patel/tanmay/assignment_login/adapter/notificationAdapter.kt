@@ -12,7 +12,7 @@ import com.patel.tanmay.assignment_login.models.Notification
 class notificationAdapter(val context: Context, val notificationList : ArrayList<Notification>) : RecyclerView.Adapter<notificationAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): notificationAdapter.ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.notification_item,parent,false)
+        val view = LayoutInflater.from(context).inflate(R.layout.sample_notifications,parent,false)
         return ViewHolder(view)
 
     }

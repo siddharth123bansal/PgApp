@@ -52,6 +52,7 @@ class NotificationActivity : AppCompatActivity() {
             override fun responseCallback(response: JSONObject) {
                 notificationList.clear()
                 if(response.has("message") && response.getString("message").equals("No notifications")){
+                    Toast.makeText(this@NotificationActivity, response.toString(), Toast.LENGTH_LONG).show()
                 }else {
                     val notifications = response.getJSONArray("notifications")
                     if(notifications.length() > 0){

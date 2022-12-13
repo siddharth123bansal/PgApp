@@ -77,7 +77,6 @@ class allMembersAdapter(var context : Context, var list : ArrayList<Member>, val
 
             }
         })
-
         holder.paidCheckBox.isEnabled = roomID.length != 0
         holder.paidCheckBox.setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
@@ -91,11 +90,7 @@ class allMembersAdapter(var context : Context, var list : ArrayList<Member>, val
                             Log.d(TAG,response.toString())
                             loadingDialog?.dismiss()
                             Toast.makeText(context, "Rent paid successfully 👍", Toast.LENGTH_SHORT).show()
-
-
                         }
-
-
                         override fun errorCallback(error_message: JSONObject) {
                             loadingDialog?.dismiss()
                             Log.d(TAG,"ERROR : ->  "+error_message?.toString())
@@ -125,7 +120,40 @@ class allMembersAdapter(var context : Context, var list : ArrayList<Member>, val
                     loadingDialog.show()
                     request.postWithBody(Constants.PAY_RENT,bodyData,user.get("token").toString())
                 }else{
+                    val request = VolleyRequest(context, object :
+                        CallBack {
+                        override fun responseCallback(response: JSONObject) {
+                            //fetchData()
+                            Log.d(TAG,response.toString())
+                            loadingDialog?.dismiss()
+                            Toast.makeText(context, "Rent Unpaid", Toast.LENGTH_SHORT).show()
+                        }
+                        override fun errorCallback(error_message: JSONObject) {
+                            loadingDialog?.dismiss()
+                            Log.d(TAG,"ERROR : ->  "+error_message?.toString())
+                            Toast.makeText(context, error_message.getString("error"), Toast.LENGTH_LONG).show()
+                            //Toast.makeText(context, check.toString(), Toast.LENGTH_LONG).show()
+                        }
+                        override fun responseStatus(response_code: NetworkResponse?) {
+                            if (response_code != null) {
+                                RES_CODE = response_code.statusCode
+                            }
+                            Log.d(TAG,"RESPONCE_CODE : "+response_code)
+                        }
+                    })
 
+                    val t = JSONObject(Utils.getTime(context))
+                    val year = t.getString("year").toInt()
+                    val month = t.getString("month").toInt()
+
+                    val bodyData = JSONObject()
+                    bodyData.put("roomid",roomID)
+                    bodyData.put("userid",listItem._id)
+                    bodyData.put("month",month)
+                    bodyData.put("year",year)
+                    bodyData.put("paid","false")
+                    loadingDialog.show()
+                    request.postWithBody(Constants.PAY_RENT,bodyData,user.get("token").toString())
                 }
             }
         })
