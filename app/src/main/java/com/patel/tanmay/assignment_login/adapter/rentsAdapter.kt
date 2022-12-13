@@ -46,15 +46,9 @@ class rentsAdapter(var context: Context, var list: ArrayList<Room>, val user: JS
             val list = listOf<String>("A","B","C","D","E")
             memberIconAdapter = memberIconAdapter(context,list.subList(0,listItem.members.size),listItem,true)
         }
-
-
-
         holder.current_state.adapter = memberIconAdapter
         memberIconAdapter.notifyDataSetChanged()
-
         holder.editRoomBtn.visibility = View.GONE
-
-
         holder.itemView.setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
                 val i = Intent(context, RentMemberActivity::class.java)
@@ -63,19 +57,13 @@ class rentsAdapter(var context: Context, var list: ArrayList<Room>, val user: JS
                 i.putExtra("ROOM_DATA",itemDataString)
                 i.putExtra("USER", user.toString())
                 context.startActivity(i)
-
-
             }
         })
-
         val margin = dpToPx(8)
         val layoutParams = holder.cardView.layoutParams as ConstraintLayout.LayoutParams
         layoutParams.setMargins(margin,margin,margin,margin)
         holder.cardView.layoutParams = layoutParams
-
-
     }
-
     class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView), Serializable {
         var roomNo = itemView.findViewById<TextView>(R.id.tvRoomNo)
         var floorNo = itemView.findViewById<TextView>(R.id.tvFloorNo)

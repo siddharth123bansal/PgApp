@@ -28,10 +28,7 @@ class RentMemberActivity : AppCompatActivity() {
         val gson = Gson()
         room =gson.fromJson(intent.getStringExtra("ROOM_DATA"), Room::class.java)
         user = JSONObject(intent.getStringExtra("USER").toString())
-
         roomSubHeading.setText(""+room.beds+" Beds Per Room, TV, Washroom")
-
-
         memberRentListRv = findViewById(R.id.rentMembersRV)
         roomMemberAdapter = allMembersAdapter(this,room.members,room.roomID,user)
         memberRentListRv.adapter = roomMemberAdapter
@@ -44,6 +41,5 @@ class RentMemberActivity : AppCompatActivity() {
                 startActivity(i)
             }
         })
-
     }
 }

@@ -1,5 +1,6 @@
 package com.patel.tanmay.assignment_login.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.Html
@@ -29,6 +30,7 @@ class LoginActivity : AppCompatActivity() {
     val TAG =  "LOGIN"
     var RES_CODE = -1
     
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -188,5 +190,4 @@ class LoginActivity : AppCompatActivity() {
 
         request.getRequest(Constants.PROFILE_FETCH_URL,res.get("token").toString())
     }
-
 }

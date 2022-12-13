@@ -51,7 +51,6 @@ class Rents : AppCompatActivity() {
         val year = t.getString("year").toInt()
         val month = t.getString("month").toInt()
         fetchData(month,year)
-
         calendarButton.setOnClickListener{
             val newFragment = RentDatePicker( ::fetchData)
             newFragment.show(supportFragmentManager, "datePicker")
@@ -114,9 +113,9 @@ class Rents : AppCompatActivity() {
                                         var year = -1
                                         val obj = rentPaidArray.get(i) as JSONObject
                                         if(obj.has("month"))
-                                        month = obj.get("month").toString().toInt()
+                                            month = obj.get("month").toString().toInt()
                                         if (obj.has("year"))
-                                        year = obj.get("year").toString().toInt()
+                                            year = obj.get("year").toString().toInt()
                                         val paid = obj.get("paid") as Boolean
                                        val mr = MonthyRent(month,year,paid)
                                         rentHistoryList.add(mr)

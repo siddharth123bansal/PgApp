@@ -48,6 +48,7 @@ class allMembersAdapter(var context : Context, var list : ArrayList<Member>, val
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
+        var check:String=""
 
 
         val listItem : Member = list[position]
@@ -78,7 +79,6 @@ class allMembersAdapter(var context : Context, var list : ArrayList<Member>, val
         })
 
         holder.paidCheckBox.isEnabled = roomID.length != 0
-
         holder.paidCheckBox.setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
                 val loadingDialog = LoadingDialog(context)
@@ -100,6 +100,7 @@ class allMembersAdapter(var context : Context, var list : ArrayList<Member>, val
                             loadingDialog?.dismiss()
                             Log.d(TAG,"ERROR : ->  "+error_message?.toString())
                             Toast.makeText(context, error_message.getString("error"), Toast.LENGTH_LONG).show()
+                            //Toast.makeText(context, check.toString(), Toast.LENGTH_LONG).show()
 
                         }
 
@@ -120,8 +121,11 @@ class allMembersAdapter(var context : Context, var list : ArrayList<Member>, val
                     bodyData.put("userid",listItem._id)
                     bodyData.put("month",month)
                     bodyData.put("year",year)
+                    bodyData.put("paid",holder.paidCheckBox.isChecked.toString())
                     loadingDialog.show()
                     request.postWithBody(Constants.PAY_RENT,bodyData,user.get("token").toString())
+                }else{
+
                 }
             }
         })

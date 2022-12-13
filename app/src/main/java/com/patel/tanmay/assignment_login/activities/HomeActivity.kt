@@ -67,28 +67,19 @@ class HomeActivity : AppCompatActivity() {
 
         userObj = JSONObject(intent.getStringExtra("USER"))
         fetchData()
+        fetchNotifications(userObj.get("token").toString())
         calendar.setOnClickListener {
             val pdp =DatePickerDialog(this,DatePickerDialog.OnDateSetListener { view, iy, im, id ->
                 y=iy
                 m=im
                 day=id
-
-
-
+                //Toast.makeText(this@HomeActivity,(""+finalcount+""+totalMembers.toString()),Toast.LENGTH_LONG).show()
+                memberText.setText("("+finalcount.toString()+"/"+totalMembers.toString()+")")
             },2022,12,12)
-            //Toast.makeText(this@HomeActivity,"present count is "+(finalcount),Toast.LENGTH_LONG).show()
-
-           // pdp.setOnCancelListener { Toast.makeText(this@HomeActivity,"present count is "+(finalcount),Toast.LENGTH_LONG).show() }
-            pdp.setOnDateSetListener{ view, iy, im, id ->
-                val i = Intent(this@HomeActivity,DatepickerIntent::class.java)
-                i.putExtra("data",finalcount.toString())
-                startActivity(i)
-            }
-
             pdp.show()
 
         }
-        fetchNotifications(userObj.get("token").toString())
+
 
         if(userObj.has("pgname"))
         pgName.setText(userObj.getString("pgname"))
@@ -160,8 +151,6 @@ class HomeActivity : AppCompatActivity() {
                 val i = Intent(this@HomeActivity,AllMembersActivity::class.java)
                 i.putExtra("USER",intent.getStringExtra("USER"))
                 startActivity(i)
-
-
             }
         })
     }
@@ -277,21 +266,16 @@ class HomeActivity : AppCompatActivity() {
                         }
                         totalMembers += userArrayList.size
 //                        Toast.makeText(this@HomeActivity,"present count is "+(totalMembers-c),Toast.LENGTH_LONG).show()
-                        finalcount=(totalMembers-c)
+                        finalcount=c
+                        memberText.setText("("+c+"/"+totalMembers.toString()+")")
                     }
-
-
-
-
-
-
                 }else {
 
                 }
 
                // loadingDialog.cancel()
 
-                memberText.setText("("+finalcount+")")
+
                 animation_view2.visibility = View.GONE
                 memberText.visibility = View.VISIBLE
 

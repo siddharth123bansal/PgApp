@@ -25,11 +25,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
+import com.google.gson.JsonArray
 import com.patel.tanmay.assignment_login.*
 import com.patel.tanmay.assignment_login.fragments.GrantAccessFromFragment
 import com.patel.tanmay.assignment_login.fragments.UpdatePasswordFormFragment
 import com.patel.tanmay.assignment_login.interfaces.CallBack
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_profile.*
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
@@ -148,9 +150,12 @@ class ProfileActivity : AppCompatActivity() {
 
             popupMenu.show()
         }
-
-            if(user.has("profileid"))
-            profile_heading.setText("Profile : "+user.get("profileid").toString().uppercase())
+        if(user.has("pgid")) {
+            profile_heading.setText("Building id: " + user.get("pgid").toString().uppercase())
+        }
+            else if(user.has("profileid")) {
+                profile_heading.setText("Building id: " + user.get("profileid").toString().uppercase())
+            }
             userEmail.setText(user.get("email").toString())
             userPhone.setText(user.get("phone").toString())
 
@@ -207,7 +212,6 @@ class ProfileActivity : AppCompatActivity() {
 
 
         }
-
     private fun updateChanges() {
         val loadingDialog = LoadingDialog(this)
         loadingDialog.setCancelable(false)

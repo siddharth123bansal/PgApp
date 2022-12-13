@@ -60,7 +60,7 @@
                             android:fontFamily="@font/roboto_medium"
                             android:gravity="top"
                             android:lineSpacingExtra="2sp"
-                            android:text="Profile"
+                            android:text="Profile id"
                             android:textColor="#1C1B1F"
                             android:textSize="20sp" />
 
