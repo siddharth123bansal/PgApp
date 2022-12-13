@@ -85,7 +85,6 @@ class HomeActivity : AppCompatActivity() {
                 Toast.makeText(this@HomeActivity,"present count is "+(finalcount),Toast.LENGTH_LONG).show()
                 i.putExtra("data",finalcount.toString())
                 startActivity(i)
-                finish()
             }
             pdp.show()
         }
