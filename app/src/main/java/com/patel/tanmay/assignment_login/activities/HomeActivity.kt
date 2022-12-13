@@ -81,8 +81,6 @@ class HomeActivity : AppCompatActivity() {
            // pdp.setOnCancelListener { Toast.makeText(this@HomeActivity,"present count is "+(finalcount),Toast.LENGTH_LONG).show() }
             pdp.setOnDismissListener {
                 val i = Intent(this@HomeActivity,DatepickerIntent::class.java)
-//                val str=(totalMembers-c)
-                Toast.makeText(this@HomeActivity,"present count is "+(finalcount),Toast.LENGTH_LONG).show()
                 i.putExtra("data",finalcount.toString())
                 startActivity(i)
             }
