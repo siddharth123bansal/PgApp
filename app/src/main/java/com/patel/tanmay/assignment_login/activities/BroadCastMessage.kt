@@ -2,7 +2,7 @@ package com.patel.tanmay.assignment_login.activities
 
 import android.app.Dialog
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -11,7 +11,6 @@ import com.patel.tanmay.assignment_login.Constants
 import com.patel.tanmay.assignment_login.R
 import com.patel.tanmay.assignment_login.VolleyRequest
 import com.patel.tanmay.assignment_login.interfaces.CallBack
-import kotlinx.android.synthetic.main.activity_add_new_pg.*
 import kotlinx.android.synthetic.main.activity_broad_cast_message.*
 import org.json.JSONObject
 
@@ -21,8 +20,8 @@ class BroadCastMessage(context: Context, var pgid:String,var token:String) : Dia
         setContentView(R.layout.activity_broad_cast_message)
         bbtn.setOnClickListener {
 
-            if(btitle.text.toString().length!=0 && bmessage.text.toString().length!=0){
-                Broadcast()
+            if(btitle.text.toString().isNotEmpty() && bmessage.text.toString().isNotEmpty()){
+                broadcast()
             }
             else if (btitle.text.toString().isEmpty()){
                 Toast.makeText(context,"Title is required",Toast.LENGTH_SHORT).show()
@@ -36,7 +35,7 @@ class BroadCastMessage(context: Context, var pgid:String,var token:String) : Dia
             }
         }
     }
-    fun Broadcast()
+    private fun broadcast()
     {
         val load=LoadingDialog(context)
         load.show()
@@ -58,7 +57,7 @@ class BroadCastMessage(context: Context, var pgid:String,var token:String) : Dia
             }
         })
         val bodyData = JSONObject()
-        bodyData.put("pgid",pgid.toString())
+        bodyData.put("pgid",pgid)
         bodyData.put("title",btitle.text.toString().trim())
         bodyData.put("message",bmessage.text.toString().trim())
         request.postWithBody(Constants.broadcast,bodyData,token)
