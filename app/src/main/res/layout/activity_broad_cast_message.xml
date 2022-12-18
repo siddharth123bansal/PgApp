@@ -5,7 +5,7 @@
     android:layout_width="300dp"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.AddNewPG">
+    tools:context=".activities.BroadCastMessage">
 
     <TextView
         android:id="@+id/textView2"
@@ -16,7 +16,7 @@
         android:layout_marginRight="10dp"
         android:gravity="center"
         android:padding="20dp"
-        android:text="Add New PG"
+        android:text="BroadCast A Message"
         android:textColor="#000000"
         android:textSize="24dp"
         android:textStyle="bold" />
@@ -29,7 +29,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginTop="25dp"
         android:layout_marginRight="32dp"
-        android:hint="Enter Name of PG"
+        android:hint="Enter Title of Message"
         android:textColorHint="#808080"
         app:boxStrokeColor="#49454F"
         app:boxStrokeWidthFocused="2dp"
@@ -37,7 +37,32 @@
         app:hintTextColor="@color/black">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/newpgname"
+            android:id="@+id/btitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:inputType="text"
+            android:textColor="@color/black" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="32dp"
+        android:hint="Enter Message"
+        android:textColorHint="#808080"
+        app:boxStrokeColor="#49454F"
+        app:boxStrokeWidthFocused="2dp"
+        app:endIconMode="clear_text"
+        app:hintTextColor="@color/black">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/bmessage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -47,14 +72,15 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/addpgbtn"
+        android:id="@+id/bbtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="10dp"
         android:padding="20dp"
-        app:cornerRadius="20dp"
-        android:text="Submit" />
+        android:text="Submit"
+        app:cornerRadius="20dp" />
+
 
 </LinearLayout>

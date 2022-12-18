@@ -19,6 +19,7 @@ import com.patel.tanmay.assignment_login.R
 import com.patel.tanmay.assignment_login.Utils
 import com.patel.tanmay.assignment_login.VolleyRequest
 import com.patel.tanmay.assignment_login.activities.HomeActivity
+import com.patel.tanmay.assignment_login.activities.LoadingDialog
 import com.patel.tanmay.assignment_login.activities.PgnameLogin
 import com.patel.tanmay.assignment_login.interfaces.CallBack
 import com.patel.tanmay.assignment_login.models.PgNameModel
@@ -91,6 +92,8 @@ class PgNameAdapter(val context: Context, val list:ArrayList<PgNameModel>, val e
         })
     }
     private fun fetchData(res : JSONObject){
+        val load=LoadingDialog(context)
+        load.show()
         val request = VolleyRequest(context, object :
             CallBack {
             override fun responseCallback(response: JSONObject) {
@@ -119,12 +122,13 @@ class PgNameAdapter(val context: Context, val list:ArrayList<PgNameModel>, val e
                 Log.d("UserMap",userMap.toString())
                 intent.putExtra("USER",JSONObject(userMap as Map<*, *>?).toString())
                 intent.putExtra("_id",pgid.toString())
+                load.dismiss()
                 context.startActivity(intent)
             }
             override fun errorCallback(error_message: JSONObject) {
                 Log.d("TAG",error_message.getString("error"))
                 Toast.makeText(context, error_message.getString("error"), Toast.LENGTH_LONG).show()
-
+                load.dismiss()
             }
 
             override fun responseStatus(response_code: NetworkResponse?) {

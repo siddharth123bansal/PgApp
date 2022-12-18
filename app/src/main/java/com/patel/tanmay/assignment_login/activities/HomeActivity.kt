@@ -105,7 +105,11 @@ class HomeActivity : AppCompatActivity() {
             .error(R.drawable.man)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(profileImageView)
-
+        broadcast.setOnClickListener {
+            val pop=this?.let { BroadCastMessage(this@HomeActivity,pgid.toString(),userObj.getString("token").toString()) }
+            pop?.setCancelable(true)
+            pop?.show()
+        }
 
             AddPg.setOnClickListener {
                 val pop=this?.let { AddNewPG(this@HomeActivity,userObj.getString("token").toString()) }

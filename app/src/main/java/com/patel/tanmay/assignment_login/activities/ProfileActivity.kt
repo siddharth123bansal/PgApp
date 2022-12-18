@@ -162,10 +162,7 @@ class ProfileActivity : AppCompatActivity() {
 
             popupMenu.show()
         }
-        if(user.has("pgid")) {
-            profile_heading.setText("Building id: " + user.get("pgid").toString().uppercase())
-        }
-            else if(user.has("profileid")) {
+        if(user.has("profileid")) {
                 profile_heading.setText("Building id: " + user.get("profileid").toString().uppercase())
             }
             userEmail.setText(user.get("email").toString())
@@ -422,7 +419,6 @@ class ProfileActivity : AppCompatActivity() {
                 userMap.put("phone" , resUser.get("phone").toString())
                 userMap.put("profileimage" , resUser.get("profileimage").toString())
                 userMap.put("pgname", resUser.getString("pgname"))
-                userMap.put("_id", user.getString("id"))
                 userMap.put("pgaddress", resUser.getString("pgaddress"))
                 userMap.put("coverimage", resUser.getString("coverimage"))
 
@@ -494,7 +490,7 @@ class ProfileActivity : AppCompatActivity() {
                 cctv.isChecked =  facilities.getBoolean("cctv")
                 dailycleaning.isChecked =  facilities.getBoolean("dailyroomcleaning")
                 fridge.isChecked =  facilities.getBoolean("fridge")
-                Ac
+                Ac.isChecked=facilities.getBoolean("ac")
                 alternativecleaning.isChecked = facilities.getBoolean("alternativeroomcleaning")
 
                 val rulesObj = res.getJSONObject("rules")

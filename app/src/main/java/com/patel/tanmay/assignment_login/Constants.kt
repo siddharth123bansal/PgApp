@@ -28,5 +28,6 @@ class Constants {
         val changepOTP="https://backend.pgconnect.in/api/pgowner/changepasswordwithotp"
         val Add_New_Pg="https://backend.pgconnect.in/api/pgowner/addnewpg"
         val remove="https://backend.pgconnect.in/api/login/removedevicetoken"
+        val broadcast="https://backend.pgconnect.in/api/pgowner/broadcastnotification"
     }
 }
