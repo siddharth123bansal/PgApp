@@ -17,7 +17,7 @@ import com.patel.tanmay.assignment_login.interfaces.CallBack
 import org.json.JSONObject
 
 
-class RoomFormFragment(val token : String, val fetchData: () -> Unit,val roomID: String) : BottomSheetDialogFragment() {
+class RoomFormFragment(val token : String,val pgid:String, val fetchData: () -> Unit,val roomID: String) : BottomSheetDialogFragment() {
     private lateinit var floorNumber : TextInputEditText
     private lateinit var roomNumber : TextInputEditText
     private lateinit var radioGroup: RadioGroup
@@ -165,6 +165,7 @@ class RoomFormFragment(val token : String, val fetchData: () -> Unit,val roomID:
                     bodyData.put("roomnumber",roomNo)
                     bodyData.put("floornumber",floorNo)
                     bodyData.put("beds",bed.toString())
+                    bodyData.put("pgid",pgid.toString())
 
 
 

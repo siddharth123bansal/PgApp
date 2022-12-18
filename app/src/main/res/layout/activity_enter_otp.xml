@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        tools:context=".activities.EnterOtp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="81dp"
+                android:src="@drawable/pg_logo" />
+
+            <TextView
+                android:id="@+id/otpsend"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="26dp"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="top"
+                android:lineSpacingExtra="4sp"
+                android:text="We have sent you the OTP On Your Email"
+                android:textColor="#000F08"
+                android:textSize="16dp"
+                android:translationY="-1.94sp" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="32dp"
+                android:hint="Enter OTP"
+                android:textColorHint="#808080"
+                app:boxStrokeColor="#49454F"
+                app:boxStrokeWidthFocused="2dp"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/otp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:maxLength="6"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="32dp"
+                android:hint="Enter new password"
+                android:textColorHint="#808080"
+                app:boxStrokeWidthFocused="2dp"
+                app:endIconMode="password_toggle"
+                app:hintTextColor="@color/black"
+                app:boxStrokeColor="#49454F"
+                app:endIconTint="#49454F"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/newPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:inputType="textPassword"
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/againOTP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|end"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="right|end"
+                android:text="Resend otp"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="32dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginRight="32dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/loadings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/animation_view"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+
+                        app:lottie_autoPlay="true"
+
+                        app:lottie_loop="true"
+
+                        app:lottie_rawRes="@raw/loading" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Please Wait ..."
+
+                        />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/btnotp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/btn_back"
+                    android:fontFamily="@font/roboto_medium"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="Change Password"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+

@@ -74,15 +74,18 @@
                         android:padding="10dp">
 
                         <!-- INPUT -->
+
+                        <!-- ICON -->
                         <EditText
                             android:id="@+id/username_input"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginStart="9dp"
                             android:layout_toEndOf="@+id/username_icon"
                             android:backgroundTint="#F4FFFE"
                             android:fontFamily="@font/roboto"
                             android:hint="Username"
+                            android:minHeight="48dp"
                             android:padding="10dp"
                             android:text=""
                             android:textColor="#49454F"
@@ -90,7 +93,6 @@
                             android:textFontWeight="400"
                             android:textSize="16sp" />
 
-                        <!-- ICON -->
                         <ImageView
                             android:id="@+id/username_icon"
                             android:layout_width="40dp"
@@ -118,6 +120,7 @@
                             android:backgroundTint="#F4FFFE"
                             android:fontFamily="@font/roboto"
                             android:hint="Phone"
+                            android:minHeight="48dp"
                             android:padding="10dp"
                             android:text=""
                             android:textColor="#49454F"
@@ -333,7 +336,15 @@
                                 android:textColor="@color/black" />
 
                         </com.google.android.material.textfield.TextInputLayout>
-
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/idproof_image"
+                            android:layout_width="132dp"
+                            android:layout_height="132dp"
+                            android:layout_marginTop="16dp"
+                            android:src="@drawable/banner"
+                            android:layout_gravity="center_horizontal"
+                            app:civ_border_color="#FF000000"
+                            app:civ_border_width="2dp" />
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
@@ -433,9 +444,82 @@
                                 android:inputType="text"
                                 android:textColor="@color/black" />
                         </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:hint="Rent"
+                            android:textColorHint="#808080"
+                            app:boxStrokeColor="#49454F"
+                            app:boxStrokeWidthFocused="2dp"
+                            app:endIconMode="clear_text"
+                            app:hintTextColor="@color/black">
 
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/Rent"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:inputType="text"
+                                android:textColor="@color/black" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:hint="Advance Rent"
+                            android:textColorHint="#808080"
+                            app:boxStrokeColor="#49454F"
+                            app:boxStrokeWidthFocused="2dp"
+                            app:endIconMode="clear_text"
+                            app:hintTextColor="@color/black">
 
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/RentAdv"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:inputType="text"
+                                android:textColor="@color/black" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:hint="Aadhar Number"
+                            android:textColorHint="#808080"
+                            app:boxStrokeColor="#49454F"
+                            app:boxStrokeWidthFocused="2dp"
+                            app:endIconMode="clear_text"
+                            app:hintTextColor="@color/black">
 
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/adharnumber"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:inputType="text"
+                                android:textColor="@color/black" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:hint="Occupation"
+                            android:textColorHint="#808080"
+                            app:boxStrokeColor="#49454F"
+                            app:boxStrokeWidthFocused="2dp"
+                            app:endIconMode="clear_text"
+                            app:hintTextColor="@color/black">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/Ocpt"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:inputType="text"
+                                android:textColor="@color/black" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
                         <TextView
                             android:id="@+id/dndStatus"

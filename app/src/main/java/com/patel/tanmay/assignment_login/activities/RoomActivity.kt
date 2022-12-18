@@ -1,5 +1,6 @@
 package com.patel.tanmay.assignment_login.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -29,15 +30,18 @@ class RoomActivity : AppCompatActivity() {
     lateinit var memberRecyclerView: RecyclerView
     lateinit var roomMemberAdapter: roomMemberAdapter
     val TAG = "ROOMMEB"
+    lateinit var pgid:String
     var RES_CODE = -1
 
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room)
         val gson = Gson()
         room =gson.fromJson(intent.getStringExtra("ROOM_DATA"), Room::class.java)
         user = JSONObject(intent.getStringExtra("USER").toString())
+        pgid=intent.getStringExtra("_id").toString()
 
         val roomHash = JSONObject(intent.getStringExtra("ROOM_LIST"))
 
@@ -57,6 +61,7 @@ class RoomActivity : AppCompatActivity() {
                 override fun onClick(p0: View?) {
                     val i = Intent(this@RoomActivity,AllRoomsActivity::class.java)
                     i.putExtra("USER",user.toString())
+                    i.putExtra("_id",pgid.toString())
                     finish()
                     startActivity(i)
 

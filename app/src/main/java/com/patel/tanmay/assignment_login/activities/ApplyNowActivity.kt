@@ -38,9 +38,11 @@ class ApplyNowActivity : AppCompatActivity() {
             val phone = evPhone.text.toString().trim()
             val email = evEmail.text.toString().trim()
             val pgName = evPGName.text.toString().trim()
+            val pgloc=evPGloc.text.toString().trim()
 
             if(name.length != 0 && phone.length != 0 &&
-                email.length != 0 && pgName.length != 0){
+                email.length != 0 && pgName.length != 0 &&
+                pgloc.length != 0){
 
                 val loadingDialog  = LoadingDialog(this)
                 loadingDialog.show()
@@ -69,6 +71,7 @@ class ApplyNowActivity : AppCompatActivity() {
                 body.put("email",email)
                 body.put("name",name)
                 body.put("phone",phone)
+                body.put("location",pgloc)
 
 
                 request.postWithBody(Constants.APPLY_FOR_APP_ACCESS,body,"")

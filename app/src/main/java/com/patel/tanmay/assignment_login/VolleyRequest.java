@@ -82,8 +82,6 @@ public class VolleyRequest {
                     return headers;
                 }
             };
-
-
             request.setRetryPolicy(
                     new DefaultRetryPolicy(
                             0,

@@ -23,7 +23,7 @@ import java.io.Serializable
 import kotlin.reflect.KFunction2
 
 
-class rentsAdapter(var context: Context, var list: ArrayList<Room>, val user: JSONObject, val fetchData: KFunction2<Int, Int, Unit>) : RecyclerView.Adapter<rentsAdapter.ViewHolder>(){
+class rentsAdapter(var context: Context,var pgid:String,var list: ArrayList<Room>, val user: JSONObject, val fetchData: KFunction2<Int, Int, Unit>) : RecyclerView.Adapter<rentsAdapter.ViewHolder>(){
     private lateinit var memberIconAdapter : memberIconAdapter
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): rentsAdapter.ViewHolder {
 
@@ -56,6 +56,7 @@ class rentsAdapter(var context: Context, var list: ArrayList<Room>, val user: JS
                 val itemDataString = gson.toJson(listItem)
                 i.putExtra("ROOM_DATA",itemDataString)
                 i.putExtra("USER", user.toString())
+                i.putExtra("_id",pgid.toString())
                 context.startActivity(i)
             }
         })

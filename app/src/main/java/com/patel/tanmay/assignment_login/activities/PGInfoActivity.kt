@@ -18,11 +18,9 @@ class PGInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pginfo)
         val token = intent.getStringExtra("TOKEN")
-
         back_btn.setOnClickListener{
             finish()
         }
-
         val request = VolleyRequest(this@PGInfoActivity, object :
             CallBack {
             override fun responseCallback(response: JSONObject) {
@@ -108,9 +106,8 @@ class PGInfoActivity : AppCompatActivity() {
 
             }
         })
-
-
-        request.getRequest(Constants.PROFILE_FETCH_URL,token)
+        val pgid=intent.getStringExtra("_id")
+        request.getRequest(Constants.PROFILE_FETCH_URL+pgid.toString(),token)
     }
 
     override fun onBackPressed() {

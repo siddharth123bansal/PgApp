@@ -1,5 +1,6 @@
 package com.patel.tanmay.assignment_login.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -7,6 +8,7 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Base64
 import android.util.JsonReader
 import android.util.Log
 import android.view.MenuItem
@@ -31,10 +33,16 @@ import com.patel.tanmay.assignment_login.fragments.GrantAccessFromFragment
 import com.patel.tanmay.assignment_login.fragments.UpdatePasswordFormFragment
 import com.patel.tanmay.assignment_login.interfaces.CallBack
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.activity_add_new_pg.*
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_profile.*
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
+import javax.crypto.Cipher
+import javax.crypto.SecretKeyFactory
+import javax.crypto.spec.IvParameterSpec
+import javax.crypto.spec.PBEKeySpec
+import javax.crypto.spec.SecretKeySpec
 
 
 class ProfileActivity : AppCompatActivity() {
@@ -57,13 +65,14 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var bitmap: Bitmap
     private lateinit var updateChangesButton : TextView
     private var imageRef = "PROFILE"
-
+    lateinit var pgid:String
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
         user = JSONObject(intent.getStringExtra("USER"))
         fetchDetails()
-
+        pgid=intent.getStringExtra("_id").toString()
         toolbar = findViewById(R.id.toolbar1)
         setSupportActionBar(toolbar)
 
@@ -73,6 +82,9 @@ class ProfileActivity : AppCompatActivity() {
             imageRef = "BANNER"
             mGetContent.launch("image/*")
         }
+//        pgid=intent.getStringExtra("_id").toString()
+//        Log.d("profileid",pgid.toString())
+
 
         bannerView = findViewById(R.id.bannerLayout)
         updateChangesButton = findViewById(R.id.UpdateAddressButton)
@@ -111,6 +123,7 @@ class ProfileActivity : AppCompatActivity() {
             override fun onClick(p0: View?) {
                 val i = Intent(this@ProfileActivity, HomeActivity::class.java)
                 i.putExtra("USER",user.toString())
+                i.putExtra("_id",pgid.toString())
                 startActivity(i)
                 finish()
             }
@@ -121,13 +134,12 @@ class ProfileActivity : AppCompatActivity() {
         logoutBtn.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
                 Utils.deleteUser(this@ProfileActivity)
+                logoutfrom(user.get("token").toString())
                 startActivity(Intent(this@ProfileActivity, LoginActivity::class.java))
                 finish()
             }
         }
-
         )
-
         menuButton.setOnClickListener{
             val popupMenu = PopupMenu(this,menuButton)
             popupMenu.menuInflater.inflate(R.menu.profile_menu,popupMenu.menu)
@@ -206,11 +218,6 @@ class ProfileActivity : AppCompatActivity() {
             }else
                 Toast.makeText(this, "Empty address field", Toast.LENGTH_SHORT).show()
         }
-
-
-
-
-
         }
     private fun updateChanges() {
         val loadingDialog = LoadingDialog(this)
@@ -236,7 +243,6 @@ class ProfileActivity : AppCompatActivity() {
             R.id.threeTimes -> 3
             else  -> 0
         }
-
         val facilities = JSONObject()
         facilities.put("hotwater",hotwater.isChecked)
         facilities.put("parkingspace",parking.isChecked)
@@ -251,6 +257,7 @@ class ProfileActivity : AppCompatActivity() {
         facilities.put("cctv",cctv.isChecked)
         facilities.put("dailyroomcleaning",dailycleaning.isChecked)
         facilities.put("fridge",fridge.isChecked)
+        facilities.put("ac",Ac.isChecked)
         facilities.put("alternativeroomcleaning",alternativecleaning.isChecked)
 
         val rules = JSONObject()
@@ -259,15 +266,15 @@ class ProfileActivity : AppCompatActivity() {
         rules.put("novisitors",visitors.isChecked)
 
 
+
+
+        body.put("pgid",pgid.toString())
         body.put("address",address_input.text.toString().trim())
         body.put("pgtype",pgType)
         body.put("roomsharingoptions",roomSharingOpt)
         body.put("food",food)
         body.put("facilities",facilities)
         body.put("rules",rules)
-
-
-
         val request = VolleyRequest(this, object :
             CallBack {
             override fun responseCallback(response: JSONObject) {
@@ -293,7 +300,25 @@ class ProfileActivity : AppCompatActivity() {
 
         request.putWithBody(Constants.CHANGE_PROFILE,body,token)
     }
-
+    private fun logoutfrom(token:String)
+    {
+        val request = VolleyRequest(this,object : CallBack {
+            override fun responseCallback(response: JSONObject?) {
+                val res= JSONObject(response.toString())
+                val msg=res.getString("message")
+                Log.d("asd",msg.toString())
+                Toast.makeText(this@ProfileActivity,msg.toString(),Toast.LENGTH_LONG).show()
+            }
+            override fun errorCallback(error_message: JSONObject?) {
+                Log.d("asd","error in adding Pg")
+            }
+            override fun responseStatus(response_code: NetworkResponse?) {
+                Log.d("asd",response_code.toString())
+            }
+        })
+        val bodyData = JSONObject()
+        request.postWithBody(Constants.remove,bodyData,token)
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -316,16 +341,13 @@ class ProfileActivity : AppCompatActivity() {
                                 }
                             }
                         })
-                }
-
+                    }
                 val  inputStream =this.contentResolver?.openInputStream(resultUri)
                 bitmap = BitmapFactory.decodeStream(inputStream)
                 uploadBitmap(bitmap)
             }
-
         }
     }
-
     private fun uploadBitmap(bitmap: Bitmap) {
         var URL = Constants.CHANGE_PROFILE_IMAGE
         if(!imageRef.equals("PROFILE")) URL = Constants.CHANGE_COVER_IMAGE
@@ -341,7 +363,6 @@ class ProfileActivity : AppCompatActivity() {
                     Log.d(TAG,response.toString())
                     fetchData()
                     loading.cancel()
-
                 }
             },
             object : Response.ErrorListener {
@@ -370,7 +391,6 @@ class ProfileActivity : AppCompatActivity() {
                 return headers
             }
         }
-
         volleyMultipartRequest.setRetryPolicy(
             DefaultRetryPolicy(
                 0,
@@ -402,7 +422,7 @@ class ProfileActivity : AppCompatActivity() {
                 userMap.put("phone" , resUser.get("phone").toString())
                 userMap.put("profileimage" , resUser.get("profileimage").toString())
                 userMap.put("pgname", resUser.getString("pgname"))
-                userMap.put("id", user.getString("id"))
+                userMap.put("_id", user.getString("id"))
                 userMap.put("pgaddress", resUser.getString("pgaddress"))
                 userMap.put("coverimage", resUser.getString("coverimage"))
 
@@ -425,12 +445,10 @@ class ProfileActivity : AppCompatActivity() {
                 Log.d(TAG,"RESPONCE_CODE : "+response_code)
             }
         })
-
-
-        request.getRequest(Constants.PROFILE_FETCH_URL,user.get("token").toString())
+        pgid=intent.getStringExtra("_id").toString()
+        Log.d("PRo",Constants.PROFILE_FETCH_URL+pgid.toString())
+        request.getRequest(Constants.PROFILE_FETCH_URL+pgid.toString(),user.get("token").toString())
     }
-
-
     private fun fetchDetails(){
         val request = VolleyRequest(this@ProfileActivity, object :
             CallBack {
@@ -476,15 +494,13 @@ class ProfileActivity : AppCompatActivity() {
                 cctv.isChecked =  facilities.getBoolean("cctv")
                 dailycleaning.isChecked =  facilities.getBoolean("dailyroomcleaning")
                 fridge.isChecked =  facilities.getBoolean("fridge")
+                Ac
                 alternativecleaning.isChecked = facilities.getBoolean("alternativeroomcleaning")
 
                 val rulesObj = res.getJSONObject("rules")
                 nosomke.isChecked = rulesObj.getBoolean("nosmoking")
                 noparties.isChecked = rulesObj.getBoolean("noparties")
                 visitors.isChecked = rulesObj.getBoolean("novisitors")
-
-
-
             }
 
             override fun errorCallback(error_message: JSONObject) {
@@ -500,19 +516,19 @@ class ProfileActivity : AppCompatActivity() {
                 Log.d(TAG,"RESPONCE_CODE : "+response_code)
             }
         })
-
-        request.getRequest(Constants.PROFILE_FETCH_URL,user.get("token").toString())
+        pgid=intent.getStringExtra("_id").toString()
+        Log.d("PRo",Constants.PROFILE_FETCH_URL+pgid.toString())
+        request.getRequest(Constants.PROFILE_FETCH_URL+pgid.toString(),user.get("token").toString())
     }
 
 
     override fun onBackPressed() {
         val i = Intent(this@ProfileActivity, HomeActivity::class.java)
         i.putExtra("USER",user.toString())
+        i.putExtra("_id",pgid.toString())
         startActivity(i)
         finish()
     }
-
-
 
 }
 

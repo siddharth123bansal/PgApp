@@ -19,12 +19,13 @@ class RentMemberActivity : AppCompatActivity() {
     lateinit var roomMemberAdapter: allMembersAdapter
     lateinit var room: Room
     lateinit var user : JSONObject
+    lateinit var pgid:String
     val TAG = "ROOMMEB"
     var RES_CODE = -1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rent_member)
-
+        pgid=intent.getStringExtra("_id").toString()
         val gson = Gson()
         room =gson.fromJson(intent.getStringExtra("ROOM_DATA"), Room::class.java)
         user = JSONObject(intent.getStringExtra("USER").toString())
@@ -38,6 +39,7 @@ class RentMemberActivity : AppCompatActivity() {
             override fun onClick(p0: View?) {
                 val i = Intent(this@RentMemberActivity,Rents::class.java)
                 i.putExtra("USER",user.toString())
+                i.putExtra("_id",pgid.toString())
                 startActivity(i)
             }
         })

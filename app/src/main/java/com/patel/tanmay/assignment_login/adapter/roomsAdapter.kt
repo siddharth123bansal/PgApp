@@ -22,7 +22,7 @@ import org.json.JSONObject
 import java.io.Serializable
 
 
-class roomsAdapter(var context : Context, var list : ArrayList<Room>, val supportFragmentManager: FragmentManager, val user : JSONObject, val fetchData: () -> Unit, val roomIdHash : JSONObject) : RecyclerView.Adapter<roomsAdapter.ViewHolder>(){
+class roomsAdapter(var context : Context, var list : ArrayList<Room>,val pgid:String, val supportFragmentManager: FragmentManager, val user : JSONObject, val fetchData: () -> Unit, val roomIdHash : JSONObject) : RecyclerView.Adapter<roomsAdapter.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): roomsAdapter.ViewHolder {
 
         var view = LayoutInflater.from(context).inflate(R.layout.room_item,parent,false)
@@ -52,7 +52,7 @@ class roomsAdapter(var context : Context, var list : ArrayList<Room>, val suppor
                     bundle.putString("beds",listItem.beds.toString())
 
 
-                    val roomFormFragment = RoomFormFragment(user.get("token").toString(),fetchData,listItem.roomID)
+                    val roomFormFragment = RoomFormFragment(user.get("token").toString(),pgid.toString(),fetchData,listItem.roomID)
                     roomFormFragment.arguments = bundle
                     roomFormFragment.show(supportFragmentManager,roomFormFragment.tag)
 
@@ -70,6 +70,7 @@ class roomsAdapter(var context : Context, var list : ArrayList<Room>, val suppor
                 val itemDataString = gson.toJson(listItem)
                 i.putExtra("ROOM_DATA",itemDataString)
                 i.putExtra("USER",user.toString())
+                i.putExtra("_id",pgid.toString())
                 i.putExtra("ROOM_LIST",roomIdHash.toString())
 
                 context.startActivity(i)

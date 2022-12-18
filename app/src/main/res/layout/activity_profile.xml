@@ -647,7 +647,16 @@
                              android:textColor="#1C1B1F"
                              android:textSize="14sp"/>
 
-
+                         <CheckBox
+                             android:id="@+id/Ac"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:text="Ac"
+                             android:buttonTint="#1B5299"
+                             android:fontFamily="@font/roboto"
+                             android:layout_weight="1"
+                             android:textColor="#1C1B1F"
+                             android:textSize="14sp"/>
 
 
 
@@ -821,13 +830,12 @@
                     </LinearLayout>
 
 
-
                     <TextView
-                        android:layout_gravity="center"
-                        android:layout_marginTop="8dp"
                         android:id="@+id/UpdateAddressButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
                         android:background="@drawable/btn_back"
                         android:fontFamily="@font/roboto"
                         android:gravity="center"

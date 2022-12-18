@@ -20,6 +20,7 @@ import com.android.volley.NetworkResponse
 import com.android.volley.VolleyError
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
 import com.patel.tanmay.assignment_login.Constants
 import com.patel.tanmay.assignment_login.R
@@ -38,6 +39,7 @@ import kotlin.collections.ArrayList
 class allMembersAdapter(var context : Context, var list : ArrayList<Member>, val roomID : String,val user : JSONObject) : RecyclerView.Adapter<allMembersAdapter.ViewHolder>() {
     private val TAG = "RENT"
     private var RES_CODE = -1
+    var cl:Boolean=true
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): allMembersAdapter.ViewHolder {
 
         var view = LayoutInflater.from(context).inflate(R.layout.all_members_list_item,parent,false)
@@ -78,87 +80,120 @@ class allMembersAdapter(var context : Context, var list : ArrayList<Member>, val
             }
         })
         holder.paidCheckBox.isEnabled = roomID.length != 0
+        cl=holder.paidCheckBox.isChecked
         holder.paidCheckBox.setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
                 val loadingDialog = LoadingDialog(context)
                 loadingDialog.setCancelable(false)
-                if(holder.paidCheckBox.isChecked) {
-                    val request = VolleyRequest(context, object :
-                        CallBack {
-                        override fun responseCallback(response: JSONObject) {
-                            //fetchData()
-                            Log.d(TAG,response.toString())
-                            loadingDialog?.dismiss()
-                            Toast.makeText(context, "Rent paid successfully 👍", Toast.LENGTH_SHORT).show()
-                        }
-                        override fun errorCallback(error_message: JSONObject) {
-                            loadingDialog?.dismiss()
-                            Log.d(TAG,"ERROR : ->  "+error_message?.toString())
-                            Toast.makeText(context, error_message.getString("error"), Toast.LENGTH_LONG).show()
-                            //Toast.makeText(context, check.toString(), Toast.LENGTH_LONG).show()
+                if(holder.paidCheckBox.isChecked)
+                {
 
-                        }
-
-                        override fun responseStatus(response_code: NetworkResponse?) {
-                            if (response_code != null) {
-                                RES_CODE = response_code.statusCode
+                    MaterialAlertDialogBuilder(context).setTitle("Confirmation").
+                    setMessage("Are you Sure").setPositiveButton("Yes") { dialog, which ->
+                        val request = VolleyRequest(context, object :
+                            CallBack {
+                            override fun responseCallback(response: JSONObject) {
+                                //fetchData()
+                                Log.d(TAG, response.toString())
+                                loadingDialog?.dismiss()
+                                Toast.makeText(
+                                    context,
+                                    "Rent paid successfully 👍",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
-                            Log.d(TAG,"RESPONCE_CODE : "+response_code)
-                        }
-                    })
 
-                    val t = JSONObject(Utils.getTime(context))
-                    val year = t.getString("year").toInt()
-                    val month = t.getString("month").toInt()
+                            override fun errorCallback(error_message: JSONObject) {
+                                loadingDialog?.dismiss()
+                                Log.d(TAG, "ERROR : ->  " + error_message?.toString())
+                                Toast.makeText(
+                                    context,
+                                    error_message.getString("error"),
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                //Toast.makeText(context, check.toString(), Toast.LENGTH_LONG).show()
 
-                    val bodyData = JSONObject()
-                    bodyData.put("roomid",roomID)
-                    bodyData.put("userid",listItem._id)
-                    bodyData.put("month",month)
-                    bodyData.put("year",year)
-                    bodyData.put("paid",holder.paidCheckBox.isChecked.toString())
-                    loadingDialog.show()
-                    request.postWithBody(Constants.PAY_RENT,bodyData,user.get("token").toString())
-                }else{
-                    val request = VolleyRequest(context, object :
-                        CallBack {
-                        override fun responseCallback(response: JSONObject) {
-                            //fetchData()
-                            Log.d(TAG,response.toString())
-                            loadingDialog?.dismiss()
-                            Toast.makeText(context, "Rent Unpaid", Toast.LENGTH_SHORT).show()
-                        }
-                        override fun errorCallback(error_message: JSONObject) {
-                            loadingDialog?.dismiss()
-                            Log.d(TAG,"ERROR : ->  "+error_message?.toString())
-                            Toast.makeText(context, error_message.getString("error"), Toast.LENGTH_LONG).show()
-                            //Toast.makeText(context, check.toString(), Toast.LENGTH_LONG).show()
-                        }
-                        override fun responseStatus(response_code: NetworkResponse?) {
-                            if (response_code != null) {
-                                RES_CODE = response_code.statusCode
                             }
-                            Log.d(TAG,"RESPONCE_CODE : "+response_code)
+
+                            override fun responseStatus(response_code: NetworkResponse?) {
+                                if (response_code != null) {
+                                    RES_CODE = response_code.statusCode
+                                }
+                                Log.d(TAG, "RESPONCE_CODE : " + response_code)
+                            }
+                        })//end of req
+
+                        val t = JSONObject(Utils.getTime(context))
+                        val year = t.getString("year").toInt()
+                        val month = t.getString("month").toInt()
+
+                        val bodyData = JSONObject()
+                        bodyData.put("roomid", roomID)
+                        bodyData.put("userid", listItem._id)
+                        bodyData.put("month", month)
+                        bodyData.put("year", year)
+                        bodyData.put("paid", holder.paidCheckBox.isChecked.toString())
+                        loadingDialog.show()
+                        request.postWithBody(
+                            Constants.PAY_RENT,
+                            bodyData,
+                            user.get("token").toString()
+                        )
+
+                    }
+                        .setNegativeButton("No"){dialog ,which->
+                            holder.paidCheckBox.isChecked=cl
+                            //Toast.makeText(context, holder.paidCheckBox.isChecked.toString(), Toast.LENGTH_LONG).show()
+                        }.show()
+                }
+                else
+                {
+                    MaterialAlertDialogBuilder(context).setTitle("Confirmation").
+                    setMessage("Are you Sure").setPositiveButton("Yes"){
+                        dialog,which->
+                        val request = VolleyRequest(context, object :
+                            CallBack {
+                            override fun responseCallback(response: JSONObject) {
+                                //fetchData()
+                                Log.d(TAG,response.toString())
+                                loadingDialog?.dismiss()
+                                Toast.makeText(context, "Rent Unpaid", Toast.LENGTH_SHORT).show()
+                            }
+                            override fun errorCallback(error_message: JSONObject) {
+                                loadingDialog?.dismiss()
+                                Log.d(TAG,"ERROR : ->  "+error_message?.toString())
+                                Toast.makeText(context, error_message.getString("error"), Toast.LENGTH_LONG).show()
+                                //Toast.makeText(context, check.toString(), Toast.LENGTH_LONG).show()
+                            }
+                            override fun responseStatus(response_code: NetworkResponse?) {
+                                if (response_code != null) {
+                                    RES_CODE = response_code.statusCode
+                                }
+                                Log.d(TAG,"RESPONCE_CODE : "+response_code)
+                            }
+                        })
+                        val t = JSONObject(Utils.getTime(context))
+                        val year = t.getString("year").toInt()
+                        val month = t.getString("month").toInt()
+
+                        val bodyData = JSONObject()
+                        bodyData.put("roomid",roomID)
+                        bodyData.put("userid",listItem._id)
+                        bodyData.put("month",month)
+                        bodyData.put("year",year)
+                        bodyData.put("paid","false")
+                        loadingDialog.show()
+                        request.postWithBody(Constants.PAY_RENT,bodyData,user.get("token").toString())
+                    }
+                        .setNegativeButton("No"){dialog ,which->
+                            holder.paidCheckBox.isChecked=cl
+                            holder.paidCheckBox.isSelected=cl
+                           // Toast.makeText(context, holder.paidCheckBox.isChecked.toString(), Toast.LENGTH_LONG).show()
                         }
-                    })
-
-                    val t = JSONObject(Utils.getTime(context))
-                    val year = t.getString("year").toInt()
-                    val month = t.getString("month").toInt()
-
-                    val bodyData = JSONObject()
-                    bodyData.put("roomid",roomID)
-                    bodyData.put("userid",listItem._id)
-                    bodyData.put("month",month)
-                    bodyData.put("year",year)
-                    bodyData.put("paid","false")
-                    loadingDialog.show()
-                    request.postWithBody(Constants.PAY_RENT,bodyData,user.get("token").toString())
+                        .show()
                 }
             }
         })
-
-
         holder.chatButton.setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
                 val gson = Gson()
@@ -170,16 +205,12 @@ class allMembersAdapter(var context : Context, var list : ArrayList<Member>, val
                 context.startActivity(i)
             }
         })
-        
         holder.itemView.setOnClickListener{
             val infoDialog = MemberInfoActivity(context,user.getString("token"),listItem._id)
             infoDialog.setCancelable(true)
             infoDialog.show()
         }
-
-
     }
-
     class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
 
         val name = itemView.findViewById<TextView>(R.id.tvmemberName)
@@ -187,11 +218,7 @@ class allMembersAdapter(var context : Context, var list : ArrayList<Member>, val
         val profileImage = itemView.findViewById<ImageView>(R.id.receiver_profile_image)
         val callButton = itemView.findViewById<ImageView>(R.id.phone_icon)
         val chatButton = itemView.findViewById<ImageView>(R.id.img_chat_icon)
-
-
-
     }
-
     override fun getItemCount(): Int {
         return list.size
     }

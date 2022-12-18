@@ -34,17 +34,18 @@ import kotlinx.android.synthetic.main.fragment_member_form.*
 import kotlinx.android.synthetic.main.fragment_member_form.view.*
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
+import java.security.spec.PSSParameterSpec.DEFAULT
 import java.util.*
 
 
-class MemberFormFragment(val token : String, val roomID :String,val fetchRoomMembers: () -> Unit) : BottomSheetDialogFragment() {
+class MemberFormFragment(val token : String,val roomID :String,val fetchRoomMembers: () -> Unit) : BottomSheetDialogFragment() {
     lateinit var memberName : TextInputEditText
     lateinit var memberPhone : TextInputEditText
     lateinit var memberOccupation : TextInputEditText
     lateinit var rentAmount : TextInputEditText
     lateinit var advRentAmt : TextInputEditText
     lateinit var doj : TextInputEditText
-    lateinit var loc : TextInputEditText
+    lateinit var loca : TextInputEditText
     lateinit var genRG: RadioGroup
     lateinit var addBtn : TextView
     lateinit var encodeImageString: String
@@ -77,8 +78,12 @@ class MemberFormFragment(val token : String, val roomID :String,val fetchRoomMem
         rentAmount = view.findViewById(R.id.evMemberRentAmt)
         advRentAmt  = view.evMemberAdvRentAmt
         doj=view.findViewById(R.id.evMemberdateofjoin)
-        loc=view.findViewById(R.id.evMemberlocation)
-
+        loca=view.findViewById(R.id.evMemberlocation)
+        val c=Calendar.getInstance()
+        val y=c.get(Calendar.YEAR)
+        var m=c.get(Calendar.MONTH)
+        val da=c.get(Calendar.DAY_OF_MONTH)
+       // Toast.makeText(context, (""+y+"/"+m+"/"+da).toString(), Toast.LENGTH_LONG).show()
         encodeImageString=""
         view.findViewById<ImageView>(R.id.back_btn).setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
@@ -87,11 +92,14 @@ class MemberFormFragment(val token : String, val roomID :String,val fetchRoomMem
         })
             doj.setOnClickListener {
             val pdp = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { view, iy, im, id ->
-                doj.setText(""+iy+"/"+im+"/"+id)
+                val mo=im+1
+                doj.setText(""+iy+"/"+mo+"/"+id)
                 //Toast.makeText(this@HomeActivity,(""+finalcount+""+totalMembers.toString()),Toast.LENGTH_LONG).show()
 
-            },2022,10,11)
+            },y,m,da)
+                pdp.datePicker.minDate=c.timeInMillis
             pdp.show()
+
         }
 
         view.findViewById<TextView>(R.id.btnCancel).setOnClickListener(object : View.OnClickListener{
@@ -107,17 +115,22 @@ class MemberFormFragment(val token : String, val roomID :String,val fetchRoomMem
                 val occupation = memberOccupation.text.toString().trim()
                 val rent = rentAmount.text.toString().trim()
                 val advRent = advRentAmt.text.toString().trim()
+                val dateofj =evMemberdateofjoin.text.toString().trim()
+                val loc=evMemberlocation.text.toString().trim()
 
                 when(genRG.checkedRadioButtonId){
                     R.id.rbtnMale -> gender = "Male"
                     R.id.rbtnFemale -> gender = "Female"
                 }
-                
+
                 if(name.length != 0 &&
                     phone.length != 0 &&
                     occupation.length != 0 &&
                     gender.length != 0 &&
-                      rent.length != 0  ){
+                      rent.length != 0 &&
+                            dateofj.length!=0 &&
+                            loc.length!=0){
+                    if (::loadingDialog.isInitialized) {Toast.makeText(context, "Yes loading initialized", Toast.LENGTH_SHORT).show()}
 
                     loadingDialog = context?.let { LoadingDialog(it) }!!
                     loadingDialog?.setCancelable(false)
@@ -146,7 +159,12 @@ class MemberFormFragment(val token : String, val roomID :String,val fetchRoomMem
             try {
 
                val  inputStream = context?.contentResolver?.openInputStream(filePath)
-                bitmap = BitmapFactory.decodeStream(inputStream)
+                if (::bitmap.isInitialized) {bitmap = BitmapFactory.decodeStream(inputStream)
+                }
+                else{
+                    Toast.makeText(context, " No bitmap also", Toast.LENGTH_SHORT).show()
+                }
+
 //                encodeBitmapImage(bitmap)
 
             }catch (e : Exception){
@@ -157,7 +175,7 @@ class MemberFormFragment(val token : String, val roomID :String,val fetchRoomMem
         }
 
     }
-
+//
 //    private fun encodeBitmapImage(bitmap: Bitmap?) {
 //        val byteArrayOutputStream = ByteArrayOutputStream()
 //        bitmap?.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream)
@@ -165,10 +183,8 @@ class MemberFormFragment(val token : String, val roomID :String,val fetchRoomMem
 //        val bytesOfImg = byteArrayOutputStream.toByteArray()
 //        encodeImageString = android.util.Base64.encodeToString(bytesOfImg,Base64.DEFAULT)
 //        Log.d("IMG",encodeImageString)
-
+//
 //    }
-
-
     private fun uploadBitmap() {
         val URL = Constants.ADD_USER_TO_ROOM+roomID
         val volleyMultipartRequest: VolleyMultipartRequest = object : VolleyMultipartRequest(
@@ -206,15 +222,13 @@ class MemberFormFragment(val token : String, val roomID :String,val fetchRoomMem
                 params.put("rent",rentAmount.text.toString())
                 params.put("advance",advRentAmt.text.toString())
                 params.put("dateofjoining",doj.text.toString())
-                params.put("location",loc.text.toString())
-
+                params.put("location",loca.text.toString())
                 Log.d("IMG","HI on VALUE_PARMS")
                 return params
             }
             override fun getByteData(): Map<String, DataPart> {
                 val params: MutableMap<String, DataPart> = HashMap()
                 val imagename = System.currentTimeMillis()
-                params["idproof"] = DataPart("$imagename.png", getFileDataFromDrawable(bitmap))
                 Log.d("IMG","HI on IMAGE_PARMS")
                 return params
             }

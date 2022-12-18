@@ -1,5 +1,6 @@
 package com.patel.tanmay.assignment_login.adapter
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -69,6 +70,7 @@ class roomMemberAdapter(var context : Context, var list : List<Member>,var roomI
             popupMenu.menuInflater.inflate(R.menu.user_popup_menu,popupMenu.menu)
 
             popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener{
+                @SuppressLint("SuspiciousIndentation")
                 override fun onMenuItemClick(item: MenuItem?): Boolean {
 
                   if(item?.title == "Delete Member" ) deleteRoomMember(listItem)

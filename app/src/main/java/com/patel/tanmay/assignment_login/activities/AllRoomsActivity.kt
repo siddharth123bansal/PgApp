@@ -35,7 +35,7 @@ class AllRoomsActivity : AppCompatActivity() {
     private lateinit var adapter : roomsAdapter
     private lateinit var roomIDHash : JSONObject
     private lateinit var roomHeading : TextView
-
+    lateinit var pgid:String
     val TAG = "ALLROOM"
     var RES_CODE = -1
 
@@ -43,7 +43,7 @@ class AllRoomsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_all_rooms)
-
+        pgid=intent.getStringExtra("_id").toString()
         user = JSONObject(intent.getStringExtra("USER"))
         roomIDHash = JSONObject()
 
@@ -53,24 +53,23 @@ class AllRoomsActivity : AppCompatActivity() {
             override fun onClick(p0: View?) {
                 val i = Intent(this@AllRoomsActivity, HomeActivity::class.java)
                 i.putExtra("USER",intent.getStringExtra("USER"))
+                i.putExtra("_id",pgid.toString())
                 startActivity(i)
                 finish()
                 finishAffinity()
             }
         })
-
         findViewById<FloatingActionButton>(R.id.floatingActionButton).setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
-                val roomsForm = RoomFormFragment(user.get("token").toString(), :: fetchData,"")
+                val roomsForm = RoomFormFragment(user.get("token").toString(), pgid.toString(),:: fetchData,"")
                 roomsForm.show(supportFragmentManager,roomsForm.tag)
             }
         })
-
         toolbar = findViewById(R.id.toolbar1)
         setSupportActionBar(toolbar)
         roomRV = findViewById(R.id.recyclerViewRooms)
 
-        adapter = roomsAdapter(this,roomList,supportFragmentManager,user,:: fetchData, roomIDHash)
+        adapter = roomsAdapter(this,roomList,pgid.toString(),supportFragmentManager,user,:: fetchData, roomIDHash)
         roomRV.adapter = adapter
 
         fetchData()
@@ -85,19 +84,21 @@ class AllRoomsActivity : AppCompatActivity() {
         val request = VolleyRequest(this@AllRoomsActivity, object :
             CallBack {
             override fun responseCallback(response: JSONObject) {
-                val roomsObj = response.get("rooms") as JSONArray
-                if(roomsObj.length() > 0){
-                    for (i in 0..roomsObj.length()-1){
-                        val roomItem = roomsObj.get(i) as JSONObject
-                        val roomNumber = roomItem.get("roomnumber") as Int
-                        val floorNumber = roomItem.get("floornumber") as Int
-                        val beds = roomItem.get("beds") as Int
-                        val roomId = roomItem.get("_id").toString()
-                        roomIDHash.put(roomNumber.toString(),roomId)
-                        val userList = roomItem.get("users") as JSONArray
+
+                if(response.getString("rooms").toString().equals("null")){
+                    roomList.clear()
+                }else {
+                    val roomsObj = response.get("rooms") as JSONObject
+                    if (roomsObj.length() > 0) {
+                        val roomNumber = roomsObj.get("roomnumber") as Int
+                        val floorNumber = roomsObj.get("floornumber") as Int
+                        val beds = roomsObj.get("beds") as Int
+                        val roomId = roomsObj.getString("_id").toString()
+                        roomIDHash.put(roomNumber.toString(), roomId)
+                        val userList = roomsObj.get("users") as JSONArray
                         val userArrayList = ArrayList<Member>()
-                        if(userList.length() > 0){
-                            for(i in 0..userList.length()-1){
+                        if (userList.length() > 0) {
+                            for (i in 0..userList.length() - 1) {
                                 val user = (userList.get(i) as JSONObject).get("user") as JSONObject
                                 val name = user.get("name").toString()
                                 val phone = user.get("phone").toString()
@@ -109,22 +110,32 @@ class AllRoomsActivity : AppCompatActivity() {
                                 //val rentPaid =(userList.get(i) as JSONObject).get("rentpaid") as Boolean
                                 val tempList = ArrayList<MonthyRent>()
 
-                                userArrayList.add(Member(name,phone,id,occupation,email,tempList,profileimage))
+                                userArrayList.add(
+                                    Member(
+                                        name,
+                                        phone,
+                                        id,
+                                        occupation,
+                                        email,
+                                        tempList,
+                                        profileimage
+                                    )
+                                )
                             }
                         }
 
-                        val room = Room(roomNumber,floorNumber,beds,0,roomId,userArrayList)
+                        val room = Room(roomNumber, floorNumber, beds, 0, roomId, userArrayList)
                         roomList.add(room)
+
+                        adapter.notifyDataSetChanged()
+
+
+                    } else {
+                        roomList.clear()
+                        adapter.notifyDataSetChanged()
+                        Toast.makeText(this@AllRoomsActivity, "No rooms found!", Toast.LENGTH_SHORT)
+                            .show()
                     }
-
-                    adapter.notifyDataSetChanged()
-
-
-
-                }else {
-                    roomList.clear()
-                    adapter.notifyDataSetChanged()
-                    Toast.makeText(this@AllRoomsActivity, "No rooms found!", Toast.LENGTH_SHORT).show()
                 }
                 roomHeading.setText("All Rooms ("+roomList.size+")")
                 loadingDialog.cancel()
@@ -144,8 +155,8 @@ class AllRoomsActivity : AppCompatActivity() {
                 Log.d(TAG,"RESPONCE_CODE : "+response_code)
             }
         })
-
-        request.getRequest(Constants.GET_ROOMS_DATA,user.get("token").toString())
+        val pgid=intent.getStringExtra("_id").toString()
+        request.getRequest(Constants.GET_ROOMS_DATA+pgid.toString(),user.get("token").toString())
     }
 
     override fun onRestart() {

@@ -34,6 +34,7 @@ class AllMembersActivity : AppCompatActivity() {
     lateinit var user : JSONObject
     lateinit var allMemberAdapter: allMembersAdapter
     lateinit var allMemberRV : RecyclerView
+    lateinit var pgid:String
     private lateinit var memberList : ArrayList<Member>
     private lateinit var headingText : TextView
 
@@ -44,7 +45,7 @@ class AllMembersActivity : AppCompatActivity() {
         loadingDialog.setCancelable(false)
         val gson = Gson()
         user = JSONObject(intent.getStringExtra("USER"))
-
+        pgid=intent.getStringExtra("_id").toString()
         try {
             Log.d("HOME","SENDING UID :-> "+user.getString("id"))
         }catch (e : Exception){
@@ -63,6 +64,7 @@ class AllMembersActivity : AppCompatActivity() {
             override fun onClick(p0: View?) {
                 val i = Intent(this@AllMembersActivity, HomeActivity::class.java)
                 i.putExtra("USER",intent.getStringExtra("USER"))
+                i.putExtra("_id",pgid.toString())
                 startActivity(i)
                 finish()
                 finishAffinity()
@@ -75,7 +77,8 @@ class AllMembersActivity : AppCompatActivity() {
 
             CallBack {
 
-            override fun responseCallback(response: JSONObject) {
+            override fun responseCallback(response: JSONObject)
+            {
                 memberList.clear()
                 val userArray = response.get("users") as JSONArray
                 if(userArray.length() > 0){
@@ -114,7 +117,8 @@ class AllMembersActivity : AppCompatActivity() {
 
                     allMemberAdapter.notifyDataSetChanged()
 
-                }else {
+                }
+                else {
                     Toast.makeText(this@AllMembersActivity, "No members found!", Toast.LENGTH_SHORT).show()
                 }
                 headingText.setText("All Members ("+memberList.size+")")
@@ -140,7 +144,7 @@ class AllMembersActivity : AppCompatActivity() {
             }
         })
 
-        request.getRequest(Constants.GET_ALL_USER,user.get("token").toString())
+        request.getRequest(Constants.GET_ALL_USER+pgid.toString(),user.get("token").toString())
         loadingDialog.show()
 
     }
